@@ -20,5 +20,6 @@ public class State {
     @GeneratedValue
     private Long id;
 
+    private String stateId;
     private String stateName;
 }

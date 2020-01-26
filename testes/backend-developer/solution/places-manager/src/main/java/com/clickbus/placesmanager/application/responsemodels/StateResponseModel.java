@@ -1,12 +1,13 @@
-package com.clickbus.placesmanager.application.requestmodels;
+package com.clickbus.placesmanager.application.responsemodels;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @AllArgsConstructor
+@Builder
 @Getter
-public class StateRequestModel {
+public class StateResponseModel {
+    private String stateId;
     private String stateName;
 }
