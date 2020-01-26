@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  placesmanager-api:
+    container_name: placesmanager-api
+    restart: always
+    build:
+      context: .
+    volumes:
+      - ./target/:/placesmanager
+    ports:
+      - "8080:8080"
+    depends_on:
+      - placesmanager-mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: development
+      MYSQL_URL: jdbc:mysql://placesmanager-mysql/places_manager
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  placesmanager-mysql:
+    container_name: placesmanager-mysql
+    image: mysql:5.7.21
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: places_manager
