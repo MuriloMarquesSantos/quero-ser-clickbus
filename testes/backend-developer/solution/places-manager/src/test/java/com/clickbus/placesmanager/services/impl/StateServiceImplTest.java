@@ -25,7 +25,7 @@ public class StateServiceImplTest {
     private StateRepository stateRepository;
 
     @Test
-    public void createState() {
+    public void createStateWithNotNullStateName_then_ShouldReturnValidStateResponseModel() {
         State stateEntity = State.builder().stateName("RJ").build();
         when(stateRepository.save(any(State.class))).thenReturn(stateEntity);
         StateResponseModel stateResponseModel = stateService.createState(StateRequestModel.
