@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("states")
@@ -18,6 +20,11 @@ public class StateController {
     @ResponseStatus(HttpStatus.CREATED)
     public StateResponseModel createState(@RequestBody StateRequestModel stateRequestModel) {
         return this.stateService.createState(stateRequestModel);
+    }
+
+    @GetMapping
+    public List<StateResponseModel> getStates() {
+        return stateService.getStates();
     }
 
 

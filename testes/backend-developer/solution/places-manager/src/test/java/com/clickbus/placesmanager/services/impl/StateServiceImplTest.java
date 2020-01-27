@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,5 +36,19 @@ public class StateServiceImplTest {
                 stateName("RJ").build());
         assertNotNull(stateResponseModel);
         assertEquals("RJ", stateResponseModel.getStateName());
+    }
+
+    @Test
+    public void getAllStates_then_shouldReturnValidResponse() {
+        List<State> stateList = Arrays.asList(
+                State.builder().stateName("RJ").build(),
+                State.builder().stateName("SP").build());
+
+        when(stateRepository.findAll()).thenReturn(stateList);
+
+        List<StateResponseModel> stateResponseModelList = stateService.getStates();
+
+        assertNotNull(stateResponseModelList);
+        assertEquals(2, stateResponseModelList.size());
     }
 }
