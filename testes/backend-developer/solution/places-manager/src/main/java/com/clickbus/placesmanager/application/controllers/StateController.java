@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class StateController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StateResponseModel createState(@RequestBody StateRequestModel stateRequestModel) {
+    public StateResponseModel createState(@RequestBody @Valid StateRequestModel stateRequestModel) {
         return this.stateService.createState(stateRequestModel);
     }
 
