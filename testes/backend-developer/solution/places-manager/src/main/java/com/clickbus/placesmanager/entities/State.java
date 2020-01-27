@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -21,5 +24,12 @@ public class State {
     private Long id;
 
     private String stateId;
+
+    @NotNull
     private String stateName;
+
+    @PrePersist
+    private void generateStateId() {
+        this.stateId = UUID.randomUUID().toString();
+    }
 }
