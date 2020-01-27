@@ -1,12 +1,11 @@
 package com.clickbus.placesmanager.application.responsemodels;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class StateResponseModel {
     private String stateId;
     private String stateName;
