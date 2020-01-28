@@ -1,6 +1,5 @@
-package com.clickbus.placesmanager.application.responsemodels;
+package com.clickbus.placesmanager.application.request;
 
-import com.clickbus.placesmanager.entities.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CityResponseModel {
+public class CityRequestModel {
 
-    private String cityId;
     private String cityName;
-    private State state;
+    private String stateId;
 }

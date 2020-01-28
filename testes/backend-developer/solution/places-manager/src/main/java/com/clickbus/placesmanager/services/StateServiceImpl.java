@@ -1,10 +1,9 @@
-package com.clickbus.placesmanager.services.impl;
+package com.clickbus.placesmanager.services;
 
-import com.clickbus.placesmanager.application.requestmodels.StateRequestModel;
-import com.clickbus.placesmanager.application.responsemodels.StateResponseModel;
+import com.clickbus.placesmanager.application.request.StateRequestModel;
+import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
 import com.clickbus.placesmanager.repository.StateRepository;
-import com.clickbus.placesmanager.services.StateService;
 import com.clickbus.placesmanager.utils.ModelMapperFactory;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -12,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service

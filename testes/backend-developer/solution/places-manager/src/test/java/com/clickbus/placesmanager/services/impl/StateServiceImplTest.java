@@ -1,9 +1,10 @@
 package com.clickbus.placesmanager.services.impl;
 
-import com.clickbus.placesmanager.application.requestmodels.StateRequestModel;
-import com.clickbus.placesmanager.application.responsemodels.StateResponseModel;
+import com.clickbus.placesmanager.application.request.StateRequestModel;
+import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
 import com.clickbus.placesmanager.repository.StateRepository;
+import com.clickbus.placesmanager.services.StateServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,8 +1,7 @@
-package com.clickbus.placesmanager.services.impl;
+package com.clickbus.placesmanager.services;
 
-import com.clickbus.placesmanager.application.responsemodels.CityResponseModel;
+import com.clickbus.placesmanager.application.response.CityResponseModel;
 import com.clickbus.placesmanager.repository.CityRepository;
-import com.clickbus.placesmanager.services.CityService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
