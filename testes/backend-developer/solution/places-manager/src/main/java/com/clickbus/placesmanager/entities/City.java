@@ -21,7 +21,7 @@ public class City {
 
     private String cityId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cityName;
 
     @ManyToOne
