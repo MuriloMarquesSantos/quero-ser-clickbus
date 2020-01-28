@@ -33,16 +33,11 @@ public class StateServiceImpl implements StateService {
         ModelMapper modelMapper = ModelMapperFactory.getInstance();
         List<State> stateList = stateRepository.findAll();
 
-        if (stateList.isEmpty()) {
-            //TO-DO enhance exception
-            throw new RuntimeException("No states found");
-        }
-
-        List<StateResponseModel> returnValues = new ArrayList<>();
-        stateList.forEach(state -> {
-            returnValues.add(modelMapper.map(state, StateResponseModel.class));
-        });
-
-        return returnValues;
+        return Optional.ofNullable(stateList)
+                .filter(list -> !list.isEmpty())
+                .orElseThrow(RuntimeException::new)
+                .stream()
+                .map(state -> modelMapper.map(state, StateResponseModel.class))
+                .collect(Collectors.toList());
     }
 }
