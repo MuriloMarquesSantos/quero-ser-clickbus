@@ -3,9 +3,9 @@ spring:
     name: placesmanager
 
   datasource:
-    url: ${MYSQL_URL}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3306/places_manager
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:

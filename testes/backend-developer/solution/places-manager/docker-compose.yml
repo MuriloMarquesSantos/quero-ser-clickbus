@@ -14,7 +14,7 @@ services:
     depends_on:
       - placesmanager-mysql
     environment:
-      SPRING_PROFILES_ACTIVE: development
+      SPRING_PROFILES_ACTIVE: dev
       MYSQL_URL: jdbc:mysql://placesmanager-mysql/places_manager
       MYSQL_USER: root
       MYSQL_PASSWORD: root
