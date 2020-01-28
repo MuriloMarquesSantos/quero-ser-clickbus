@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -18,9 +19,16 @@ public class City {
     @GeneratedValue
     private Long id;
 
+    private String cityId;
+
     @Column(nullable = false)
     private String cityName;
 
     @ManyToOne
     private State state;
+
+    @PrePersist
+    private void generateStateId() {
+        this.cityId = UUID.randomUUID().toString();
+    }
 }
