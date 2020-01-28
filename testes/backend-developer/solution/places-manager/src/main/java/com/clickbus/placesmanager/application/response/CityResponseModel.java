@@ -1,18 +1,17 @@
 package com.clickbus.placesmanager.application.response;
 
-import com.clickbus.placesmanager.entities.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 public class CityResponseModel {
 
     private String cityId;
     private String cityName;
-    private State state;
+    private StateResponseModel state;
 }
