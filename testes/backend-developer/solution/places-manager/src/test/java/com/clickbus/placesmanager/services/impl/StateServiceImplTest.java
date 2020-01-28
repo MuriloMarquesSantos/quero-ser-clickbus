@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -51,5 +52,14 @@ public class StateServiceImplTest {
 
         assertNotNull(stateResponseModelList);
         assertEquals(2, stateResponseModelList.size());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getAllStatesWithEmptyList_then_shouldThrowRunTimeException() {
+        List<State> stateList = Collections.emptyList();
+
+        when(stateRepository.findAll()).thenReturn(stateList);
+
+        List<StateResponseModel> stateResponseModelList = stateService.getStates();
     }
 }
