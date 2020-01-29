@@ -15,5 +15,6 @@ public class CityRequestModel {
 
     @NotNull
     private String cityName;
+    @NotNull
     private String stateId;
 }
