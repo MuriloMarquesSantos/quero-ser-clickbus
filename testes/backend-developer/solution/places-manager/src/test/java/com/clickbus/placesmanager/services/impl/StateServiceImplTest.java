@@ -1,6 +1,5 @@
 package com.clickbus.placesmanager.services.impl;
 
-import com.clickbus.placesmanager.application.request.StateRequestModel;
 import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
 import com.clickbus.placesmanager.repository.StateRepository;
@@ -15,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,29 +29,28 @@ public class StateServiceImplTest {
     @Mock
     private StateRepository stateRepository;
 
+    private static final List<String> VALID_STATE_NAMES = Arrays.asList("RJ", "SP");
+
     @Test
     public void createStateWithNotNullStateName_then_ShouldReturnValidStateResponseModel() {
-        State stateEntity = State.builder().stateName("RJ").build();
-        when(stateRepository.save(any(State.class))).thenReturn(stateEntity);
-        StateResponseModel stateResponseModel = stateService.createState(StateRequestModel.
-                builder().
-                stateName("RJ").build());
+        when(stateRepository.save(any(State.class))).thenReturn(createValidStateEntity());
+        StateResponseModel stateResponseModel = stateService.createState(createValidStateRequestModel());
         assertNotNull(stateResponseModel);
-        assertEquals("RJ", stateResponseModel.getStateName());
+        assertEquals(VALID_STATE_NAMES.get(0), stateResponseModel.getStateName());
     }
 
     @Test
     public void getAllStates_then_shouldReturnValidResponse() {
         List<State> stateList = Arrays.asList(
-                State.builder().stateName("RJ").build(),
-                State.builder().stateName("SP").build());
+                State.builder().stateName(VALID_STATE_NAMES.get(0)).build(),
+                State.builder().stateName(VALID_STATE_NAMES.get(1)).build());
 
         when(stateRepository.findAll()).thenReturn(stateList);
 
         List<StateResponseModel> stateResponseModelList = stateService.getStates();
 
         assertNotNull(stateResponseModelList);
-        assertEquals(2, stateResponseModelList.size());
+        assertEquals(VALID_STATE_NAMES.size(), stateResponseModelList.size());
     }
 
     @Test(expected = RuntimeException.class)
@@ -60,6 +59,6 @@ public class StateServiceImplTest {
 
         when(stateRepository.findAll()).thenReturn(stateList);
 
-        List<StateResponseModel> stateResponseModelList = stateService.getStates();
+        stateService.getStates();
     }
 }
