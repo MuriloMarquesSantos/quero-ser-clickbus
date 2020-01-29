@@ -8,11 +8,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -26,6 +24,8 @@ public class Place {
     @GeneratedValue
     private Long id;
 
+    private String placeId;
+
     private String placeName;
 
     private String slug;
@@ -35,5 +35,10 @@ public class Place {
 
     @LastModifiedDate
     private Date lastModifiedDate;
+
+    @PrePersist
+    private void generatePlaceId() {
+        this.placeId = UUID.randomUUID().toString();
+    }
 
 }

@@ -28,7 +28,7 @@ public class City {
     private State state;
 
     @PrePersist
-    private void generateStateId() {
+    private void generateCityId() {
         this.cityId = UUID.randomUUID().toString();
     }
 }
