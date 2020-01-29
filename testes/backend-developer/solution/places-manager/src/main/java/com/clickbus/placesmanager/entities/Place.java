@@ -26,6 +26,9 @@ public class Place {
 
     private String placeId;
 
+    @ManyToOne
+    private City city;
+
     private String placeName;
 
     private String slug;
