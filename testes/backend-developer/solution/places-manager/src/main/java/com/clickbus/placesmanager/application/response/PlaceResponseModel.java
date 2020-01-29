@@ -10,4 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PlaceResponseModel {
+
+    private String cityId;
+    private String cityName;
+    private String slug;
+    private CityResponseModel cityResponseModel;
 }
