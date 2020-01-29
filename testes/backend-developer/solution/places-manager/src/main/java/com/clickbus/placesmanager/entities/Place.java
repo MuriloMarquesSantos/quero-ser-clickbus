@@ -33,11 +33,13 @@ public class Place {
 
     private String slug;
 
+    @Column(nullable = false, updatable = false)
     @CreatedDate
     private Date createdDate;
 
+    @Column(nullable = false, updatable = false)
     @LastModifiedDate
-    private Date lastModifiedDate;
+    private Date updatedAt;
 
     @PrePersist
     private void generatePlaceId() {

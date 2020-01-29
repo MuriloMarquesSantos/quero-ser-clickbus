@@ -14,5 +14,5 @@ public class PlaceResponseModel {
     private String placeId;
     private String placeName;
     private String slug;
-    private CityResponseModel cityResponseModel;
+    private CityResponseModel city;
 }

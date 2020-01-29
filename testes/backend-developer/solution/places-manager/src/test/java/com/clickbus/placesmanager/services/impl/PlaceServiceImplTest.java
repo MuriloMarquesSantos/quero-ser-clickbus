@@ -2,6 +2,7 @@ package com.clickbus.placesmanager.services.impl;
 
 import com.clickbus.placesmanager.application.response.PlaceResponseModel;
 import com.clickbus.placesmanager.entities.Place;
+import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.CityRepository;
 import com.clickbus.placesmanager.repository.PlaceRepository;
 import com.clickbus.placesmanager.services.PlaceServiceImpl;
@@ -45,7 +46,14 @@ public class PlaceServiceImplTest {
         assertNotNull(placeResponseModel);
         assertEquals(placeResponseModel.getPlaceName(), createValidPlaceEntity().getPlaceName());
         assertNotNull(placeResponseModel.getSlug());
-        assertNotNull(placeResponseModel.getCityResponseModel());
+        assertNotNull(placeResponseModel.getCity());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void createPlaceWithInvalidState_then_shouldThrowResourceNotFoundException() {
+        when(cityRepository.findByCityId(anyString())).thenReturn(Optional.empty());
+
+        placeService.createPlace(createValidPlaceRequestModel());
     }
 
 }
