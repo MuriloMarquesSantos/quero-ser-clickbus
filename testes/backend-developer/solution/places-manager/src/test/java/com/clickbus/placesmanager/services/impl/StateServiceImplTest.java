@@ -35,7 +35,10 @@ public class StateServiceImplTest {
     public void createStateWithNotNullStateName_then_ShouldReturnValidStateResponseModel() {
         when(stateRepository.save(any(State.class))).thenReturn(createValidStateEntity());
         StateResponseModel stateResponseModel = stateService.createState(createValidStateRequestModel());
+
         assertNotNull(stateResponseModel);
+        assertNotNull(stateResponseModel.getStateName());
+        assertNotNull(stateResponseModel.getStateId());
         assertEquals(VALID_STATE_NAMES.get(0), stateResponseModel.getStateName());
     }
 

@@ -50,6 +50,8 @@ public class CityServiceImplTest {
         CityResponseModel cityResponseModel = cityService.createCity(createValidCityRequestModel());
 
         assertNotNull(cityResponseModel);
+        assertNotNull(cityResponseModel.getCityName());
+        assertNotNull(cityResponseModel.getCityId());
         assertEquals(cityResponseModel.getCityName(), createValidCityRequestModel().getCityName());
     }
 
