@@ -14,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.*;
@@ -44,7 +46,6 @@ public class PlaceServiceImplTest {
         PlaceResponseModel placeResponseModel = placeService.createPlace(createValidPlaceRequestModel());
 
         assertNotNull(placeResponseModel);
-        assertEquals(placeResponseModel.getPlaceName(), createValidPlaceEntity().getPlaceName());
         assertNotNull(placeResponseModel.getSlug());
         assertNotNull(placeResponseModel.getCity());
     }
@@ -54,6 +55,18 @@ public class PlaceServiceImplTest {
         when(cityRepository.findByCityId(anyString())).thenReturn(Optional.empty());
 
         placeService.createPlace(createValidPlaceRequestModel());
+    }
+
+    @Test
+    public void getAllPlaces_then_shouldReturnValidResponse() {
+        List<Place> placeList = Arrays.asList(
+                createValidPlaceEntity(), createValidPlaceEntity());
+
+        when(placeRepository.findAll()).thenReturn(placeList);
+
+        List<PlaceResponseModel> stateResponseModelList = placeService.getPlaces();
+
+        assertNotNull(stateResponseModelList);
     }
 
 }

@@ -52,7 +52,6 @@ public class CityServiceImplTest {
         assertNotNull(cityResponseModel);
         assertNotNull(cityResponseModel.getCityName());
         assertNotNull(cityResponseModel.getCityId());
-        assertEquals(cityResponseModel.getCityName(), createValidCityRequestModel().getCityName());
     }
 
     @Test(expected = ResourceNotFoundException.class)

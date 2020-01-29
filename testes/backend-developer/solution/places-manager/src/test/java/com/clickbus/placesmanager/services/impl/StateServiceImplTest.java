@@ -4,6 +4,7 @@ import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
 import com.clickbus.placesmanager.repository.StateRepository;
 import com.clickbus.placesmanager.services.StateServiceImpl;
+import com.github.javafaker.Faker;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,7 +30,8 @@ public class StateServiceImplTest {
     @Mock
     private StateRepository stateRepository;
 
-    private static final List<String> VALID_STATE_NAMES = Arrays.asList("RJ", "SP");
+    private static final Faker faker = new Faker();
+
 
     @Test
     public void createStateWithNotNullStateName_then_ShouldReturnValidStateResponseModel() {
@@ -39,21 +41,20 @@ public class StateServiceImplTest {
         assertNotNull(stateResponseModel);
         assertNotNull(stateResponseModel.getStateName());
         assertNotNull(stateResponseModel.getStateId());
-        assertEquals(VALID_STATE_NAMES.get(0), stateResponseModel.getStateName());
     }
 
     @Test
     public void getAllStates_then_shouldReturnValidResponse() {
         List<State> stateList = Arrays.asList(
-                State.builder().stateName(VALID_STATE_NAMES.get(0)).build(),
-                State.builder().stateName(VALID_STATE_NAMES.get(1)).build());
+                State.builder().stateName(faker.address().state()).build(),
+                State.builder().stateName(faker.address().state()).build());
 
         when(stateRepository.findAll()).thenReturn(stateList);
 
         List<StateResponseModel> stateResponseModelList = stateService.getStates();
 
         assertNotNull(stateResponseModelList);
-        assertEquals(VALID_STATE_NAMES.size(), stateResponseModelList.size());
+        assertEquals(stateList.size(), stateResponseModelList.size());
     }
 
     @Test(expected = RuntimeException.class)
