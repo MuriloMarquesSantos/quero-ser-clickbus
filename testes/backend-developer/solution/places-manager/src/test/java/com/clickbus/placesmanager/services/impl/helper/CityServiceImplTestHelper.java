@@ -12,6 +12,7 @@ public class CityServiceImplTestHelper {
     public static City createValidCityEntity() {
         return City.builder()
                 .cityName("Rio de Janeiro")
+                .cityId("C123123-1412312-123123")
                 .state(createValidStateEntity())
                 .build();
     }
