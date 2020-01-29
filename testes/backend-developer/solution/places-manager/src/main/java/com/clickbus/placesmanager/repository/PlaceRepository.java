@@ -1,4 +1,9 @@
 package com.clickbus.placesmanager.repository;
 
-public interface PlaceRepository {
+import com.clickbus.placesmanager.entities.Place;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PlaceRepository extends JpaRepository<Place, Long> {
 }
