@@ -8,4 +8,5 @@ import java.util.List;
 public interface PlaceService {
     PlaceResponseModel createPlace(PlaceRequestModel placeRequestModel);
     List<PlaceResponseModel> getPlaces();
+    PlaceResponseModel getPlaceByPlaceId(String placeId);
 }

@@ -53,4 +53,14 @@ public class PlaceServiceImpl implements PlaceService {
                 .map(place -> modelMapper.map(place, PlaceResponseModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public PlaceResponseModel getPlaceByPlaceId(String placeId) {
+        ModelMapper modelMapper = ModelMapperFactory.getInstance();
+        Place place = placeRepository
+                .findByPlaceId(placeId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        return modelMapper.map(place, PlaceResponseModel.class);
+    }
 }

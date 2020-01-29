@@ -6,8 +6,6 @@ import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.CityRepository;
 import com.clickbus.placesmanager.repository.PlaceRepository;
 import com.clickbus.placesmanager.services.PlaceServiceImpl;
-import com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper;
-import com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,12 +13,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.*;
-import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.*;
-import static org.junit.Assert.assertEquals;
+import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.createValidCityEntity;
+import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.createValidPlaceEntity;
+import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.createValidPlaceRequestModel;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -69,4 +68,30 @@ public class PlaceServiceImplTest {
         assertNotNull(stateResponseModelList);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void getAllPlacesWithEmptyList_then_shouldThrowRuntimeException() {
+        List<Place> placeList = Collections.emptyList();
+
+        when(placeRepository.findAll()).thenReturn(placeList);
+
+        placeService.getPlaces();
+    }
+
+    @Test
+    public void getPlaceByValidPlaceId_then_shouldReturnValidPlaceResponseModel() {
+        when(placeRepository.findByPlaceId(anyString())).thenReturn(Optional.of(createValidPlaceEntity()));
+
+        PlaceResponseModel placeResponseModel = placeService.getPlaceByPlaceId("123");
+
+        assertNotNull(placeResponseModel);
+        assertNotNull(placeResponseModel.getCity());
+        assertNotNull(placeResponseModel.getSlug());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void getPlaceByInvalidPlaceId_then_shouldThrowResourceNotFoundException() {
+        when(placeRepository.findByPlaceId(anyString())).thenReturn(Optional.empty());
+
+        placeService.getPlaceByPlaceId("123");
+    }
 }
