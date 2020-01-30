@@ -41,4 +41,11 @@ public class PlaceController {
         return this.placeService.getPlacesByPlaceName(placeName);
     }
 
+    @PutMapping("id/{placeId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceResponseModel updatePlace(@PathVariable String placeId,
+                                          @RequestBody @Valid PlaceRequestModel placeRequestModel) {
+        return this.placeService.updatePlace(placeId, placeRequestModel);
+    }
+
 }
