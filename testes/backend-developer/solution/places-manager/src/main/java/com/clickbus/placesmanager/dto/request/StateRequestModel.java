@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 public class StateRequestModel {
 
     @NotNull
