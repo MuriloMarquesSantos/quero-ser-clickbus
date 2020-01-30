@@ -1,4 +1,4 @@
-package com.clickbus.placesmanager.services.impl;
+package com.clickbus.placesmanager.services.impl.services;
 
 import com.clickbus.placesmanager.dto.response.PlaceResponseModel;
 import com.clickbus.placesmanager.entities.Place;
