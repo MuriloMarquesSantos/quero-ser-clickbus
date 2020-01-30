@@ -1,7 +1,7 @@
-package com.clickbus.placesmanager.application.controllers;
+package com.clickbus.placesmanager.controllers;
 
-import com.clickbus.placesmanager.application.request.PlaceRequestModel;
-import com.clickbus.placesmanager.application.response.PlaceResponseModel;
+import com.clickbus.placesmanager.dto.request.PlaceRequestModel;
+import com.clickbus.placesmanager.dto.response.PlaceResponseModel;
 import com.clickbus.placesmanager.services.PlaceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

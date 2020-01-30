@@ -1,7 +1,6 @@
 package com.clickbus.placesmanager.services.impl.helper;
 
-import com.clickbus.placesmanager.application.request.StateRequestModel;
-import com.clickbus.placesmanager.application.response.StateResponseModel;
+import com.clickbus.placesmanager.dto.request.StateRequestModel;
 import com.clickbus.placesmanager.entities.State;
 import com.github.javafaker.Faker;
 

@@ -1,4 +1,4 @@
-package com.clickbus.placesmanager.application.request;
+package com.clickbus.placesmanager.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class PlaceRequestModel {
+public class CityRequestModel {
 
     @NotNull
-    private String placeName;
+    private String cityName;
     @NotNull
-    private String cityId;
-
+    private String stateId;
 }

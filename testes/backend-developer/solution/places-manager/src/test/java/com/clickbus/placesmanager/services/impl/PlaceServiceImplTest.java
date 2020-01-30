@@ -1,6 +1,6 @@
 package com.clickbus.placesmanager.services.impl;
 
-import com.clickbus.placesmanager.application.response.PlaceResponseModel;
+import com.clickbus.placesmanager.dto.response.PlaceResponseModel;
 import com.clickbus.placesmanager.entities.Place;
 import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.CityRepository;

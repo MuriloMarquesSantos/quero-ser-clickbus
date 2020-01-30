@@ -1,6 +1,6 @@
 package com.clickbus.placesmanager.services.impl.helper;
 
-import com.clickbus.placesmanager.application.request.CityRequestModel;
+import com.clickbus.placesmanager.dto.request.CityRequestModel;
 import com.clickbus.placesmanager.entities.City;
 import com.github.javafaker.Faker;
 

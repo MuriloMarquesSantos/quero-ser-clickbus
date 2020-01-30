@@ -1,6 +1,6 @@
 package com.clickbus.placesmanager.services.impl.helper;
 
-import com.clickbus.placesmanager.application.request.PlaceRequestModel;
+import com.clickbus.placesmanager.dto.request.PlaceRequestModel;
 import com.clickbus.placesmanager.entities.Place;
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;

@@ -1,7 +1,7 @@
 package com.clickbus.placesmanager.services;
 
-import com.clickbus.placesmanager.application.request.StateRequestModel;
-import com.clickbus.placesmanager.application.response.StateResponseModel;
+import com.clickbus.placesmanager.dto.request.StateRequestModel;
+import com.clickbus.placesmanager.dto.response.StateResponseModel;
 
 import java.util.List;
 

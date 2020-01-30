@@ -1,4 +1,4 @@
-package com.clickbus.placesmanager.application.request;
+package com.clickbus.placesmanager.dto.request;
 
 import lombok.*;
 
