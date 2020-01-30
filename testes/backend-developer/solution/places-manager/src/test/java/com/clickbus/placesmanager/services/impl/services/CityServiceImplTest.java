@@ -1,7 +1,6 @@
 package com.clickbus.placesmanager.services.impl.services;
 
 import com.clickbus.placesmanager.dto.request.CityRequestModel;
-import com.clickbus.placesmanager.dto.request.StateRequestModel;
 import com.clickbus.placesmanager.dto.response.CityResponseModel;
 import com.clickbus.placesmanager.entities.City;
 import com.clickbus.placesmanager.exception.ResourceNotFoundException;
@@ -17,15 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.*;
-import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.createListOfValidStateEntity;
-import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.createValidStateEntity;
+import static com.clickbus.placesmanager.services.impl.helper.CityTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.StateTestHelper.createValidStateEntity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;

@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.clickbus.placesmanager.controllers.PlaceController.BASE_PATH;
+
 @AllArgsConstructor
 @RestController
-@RequestMapping("places")
+@RequestMapping(BASE_PATH)
 public class PlaceController {
 
     private PlaceService placeService;
+
+    public static final String BASE_PATH = "/places";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

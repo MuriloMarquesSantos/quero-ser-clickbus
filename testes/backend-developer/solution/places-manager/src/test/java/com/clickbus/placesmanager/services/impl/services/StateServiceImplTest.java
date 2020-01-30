@@ -7,7 +7,6 @@ import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.StateRepository;
 import com.clickbus.placesmanager.services.StateServiceImpl;
 import com.clickbus.placesmanager.utils.ModelMapperFactory;
-import com.github.javafaker.Faker;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +15,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.StateTestHelper.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;

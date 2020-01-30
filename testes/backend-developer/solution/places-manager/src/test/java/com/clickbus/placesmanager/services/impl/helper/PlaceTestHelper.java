@@ -1,7 +1,5 @@
 package com.clickbus.placesmanager.services.impl.helper;
 
-import com.clickbus.placesmanager.dto.request.PlaceRequestModel;
-import com.clickbus.placesmanager.entities.City;
 import com.clickbus.placesmanager.entities.Place;
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
@@ -9,11 +7,11 @@ import com.github.slugify.Slugify;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.CityTestHelper.*;
 
-public class PlaceServiceImplTestHelper {
+public class PlaceTestHelper {
 
-    private PlaceServiceImplTestHelper() {}
+    private PlaceTestHelper() {}
 
     private static final Faker faker = new Faker();
     private static final Slugify slugifier = new Slugify();

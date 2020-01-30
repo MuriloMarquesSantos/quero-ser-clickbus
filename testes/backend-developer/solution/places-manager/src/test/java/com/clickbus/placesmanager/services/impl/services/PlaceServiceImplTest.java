@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.createValidCityEntity;
-import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.createListOfValidPlaceEntity;
+import static com.clickbus.placesmanager.services.impl.helper.CityTestHelper.createValidCityEntity;
+import static com.clickbus.placesmanager.services.impl.helper.PlaceTestHelper.createListOfValidPlaceEntity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
