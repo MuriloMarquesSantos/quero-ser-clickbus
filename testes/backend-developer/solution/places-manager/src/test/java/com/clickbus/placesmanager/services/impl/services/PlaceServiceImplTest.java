@@ -1,6 +1,5 @@
 package com.clickbus.placesmanager.services.impl.services;
 
-import com.clickbus.placesmanager.dto.request.CityRequestModel;
 import com.clickbus.placesmanager.dto.request.PlaceRequestModel;
 import com.clickbus.placesmanager.dto.response.PlaceResponseModel;
 import com.clickbus.placesmanager.entities.Place;
@@ -17,14 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.createValidCityEntity;
-import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.PlaceServiceImplTestHelper.createListOfValidPlaceEntity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -130,5 +128,25 @@ public class PlaceServiceImplTest {
         when(placeRepository.findAllByPlaceName("Place x")).thenReturn(placeList);
 
         placeService.getPlacesByPlaceName("Place x");
+    }
+
+    @Test
+    public void updatePlaceWithValidPlaceId_then_ShouldReturnValidPlaceResponseModel() {
+        when(cityRepository.findByCityId(anyString())).thenReturn(Optional.of(createValidCityEntity()));
+        when(placeRepository.findByPlaceId(anyString())).thenReturn(Optional.of(placeList.get(0)));
+        when(placeRepository.save(any(Place.class))).thenReturn(placeList.get(0));
+
+        PlaceResponseModel placeResponseModel = placeService.updatePlace(placeList.get(0).getPlaceId(), requestModels.get(0));
+
+        assertNotNull(placeResponseModel);
+        assertEquals(placeList.get(0).getPlaceName(), placeResponseModel.getPlaceName());
+        assertEquals(placeList.get(0).getSlug(), placeResponseModel.getSlug());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void updatePlaceWithInValidPlaceId_then_shouldThrowResourceNotFoundException() {
+        when(placeRepository.findByPlaceId(anyString())).thenReturn(Optional.empty());
+
+        placeService.updatePlace(placeList.get(0).getPlaceId(), requestModels.get(0));
     }
 }
