@@ -63,13 +63,13 @@ public class PlaceServiceImplTest {
 
         when(placeRepository.findAll()).thenReturn(placeList);
 
-        List<PlaceResponseModel> stateResponseModelList = placeService.getPlaces();
+        List<PlaceResponseModel> placeResponseModels = placeService.getPlaces();
 
-        assertNotNull(stateResponseModelList);
+        assertNotNull(placeResponseModels);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void getAllPlacesWithEmptyList_then_shouldThrowRuntimeException() {
+    @Test(expected = ResourceNotFoundException.class)
+    public void getAllPlacesWithEmptyList_then_shouldThrowResourceNotFoundException() {
         List<Place> placeList = Collections.emptyList();
 
         when(placeRepository.findAll()).thenReturn(placeList);
@@ -93,5 +93,26 @@ public class PlaceServiceImplTest {
         when(placeRepository.findByPlaceId(anyString())).thenReturn(Optional.empty());
 
         placeService.getPlaceByPlaceId("123");
+    }
+
+    @Test
+    public void getPlaceByValidPlaceName_then_shouldReturnValidPlaceResponseModel() {
+        List<Place> placeList = Arrays.asList(
+                createValidPlaceEntity(), createValidPlaceEntity());
+
+        when(placeRepository.findAllByPlaceName("Place x")).thenReturn(placeList);
+
+        List<PlaceResponseModel> stateResponseModelList = placeService.getPlacesByPlaceName("Place x");
+
+        assertNotNull(stateResponseModelList);
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void getPlacesByInvalidPlaceName_then_shouldThrowResourceNotFoundException() {
+        List<Place> placeList = Collections.emptyList();
+
+        when(placeRepository.findAllByPlaceName("Place x")).thenReturn(placeList);
+
+        placeService.getPlacesByPlaceName("Place x");
     }
 }

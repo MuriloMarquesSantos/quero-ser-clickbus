@@ -75,8 +75,8 @@ public class CityServiceImplTest {
         assertEquals(VALID_CITY_NAMES.size(), cityResponseModelList.size());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void getAllCitiesWithEmptyList_then_shouldThrowRuntimeException() {
+    @Test(expected = ResourceNotFoundException.class)
+    public void getAllCitiesWithEmptyList_then_shouldThrowResourceNotFoundException() {
         List<City> cityList = Collections.emptyList();
 
         when(cityRepository.findAll()).thenReturn(cityList);

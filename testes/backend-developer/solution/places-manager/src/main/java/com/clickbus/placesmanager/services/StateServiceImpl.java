@@ -3,6 +3,7 @@ package com.clickbus.placesmanager.services;
 import com.clickbus.placesmanager.application.request.StateRequestModel;
 import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
+import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.StateRepository;
 import com.clickbus.placesmanager.utils.ModelMapperFactory;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class StateServiceImpl implements StateService {
 
         return Optional.ofNullable(stateList)
                 .filter(list -> !list.isEmpty())
-                .orElseThrow(RuntimeException::new)
+                .orElseThrow(ResourceNotFoundException::new)
                 .stream()
                 .map(state -> modelMapper.map(state, StateResponseModel.class))
                 .collect(Collectors.toList());

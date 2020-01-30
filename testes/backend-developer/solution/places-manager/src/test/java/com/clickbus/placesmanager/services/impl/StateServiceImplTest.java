@@ -2,6 +2,7 @@ package com.clickbus.placesmanager.services.impl;
 
 import com.clickbus.placesmanager.application.response.StateResponseModel;
 import com.clickbus.placesmanager.entities.State;
+import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.StateRepository;
 import com.clickbus.placesmanager.services.StateServiceImpl;
 import com.github.javafaker.Faker;
@@ -57,8 +58,8 @@ public class StateServiceImplTest {
         assertEquals(stateList.size(), stateResponseModelList.size());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void getAllStatesWithEmptyList_then_shouldThrowRunTimeException() {
+    @Test(expected = ResourceNotFoundException.class)
+    public void getAllStatesWithEmptyList_then_shouldThrowResourceNotFoundException() {
         List<State> stateList = Collections.emptyList();
 
         when(stateRepository.findAll()).thenReturn(stateList);

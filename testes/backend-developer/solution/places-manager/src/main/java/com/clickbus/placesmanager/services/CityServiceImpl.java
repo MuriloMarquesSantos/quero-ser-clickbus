@@ -48,7 +48,7 @@ public class CityServiceImpl implements CityService {
 
         return Optional.ofNullable(cityList)
                 .filter(list -> !list.isEmpty())
-                .orElseThrow(RuntimeException::new)
+                .orElseThrow(ResourceNotFoundException::new)
                 .stream()
                 .map(city -> modelMapper.map(city, CityResponseModel.class))
                 .collect(Collectors.toList());

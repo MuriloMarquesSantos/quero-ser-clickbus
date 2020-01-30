@@ -8,4 +8,5 @@ import java.util.List;
 public interface CityService {
     CityResponseModel createCity(CityRequestModel cityRequestModel);
     List<CityResponseModel> getCities();
+
 }
