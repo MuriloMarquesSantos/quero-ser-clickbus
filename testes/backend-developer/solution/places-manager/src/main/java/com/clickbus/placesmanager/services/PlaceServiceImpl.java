@@ -22,11 +22,11 @@ public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepository placeRepository;
     private final CityRepository cityRepository;
+    private static final Slugify slugifier = new Slugify();
 
     @Override
     public PlaceResponseModel createPlace(PlaceRequestModel placeRequestModel) {
         ModelMapper modelMapper = ModelMapperFactory.getInstance();
-        Slugify slugifier = new Slugify();
 
         Place place = Place.builder()
                 .placeName(placeRequestModel.getPlaceName())
@@ -57,9 +57,7 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public PlaceResponseModel getPlaceByPlaceId(String placeId) {
         ModelMapper modelMapper = ModelMapperFactory.getInstance();
-        Place place = placeRepository
-                .findByPlaceId(placeId)
-                .orElseThrow(ResourceNotFoundException::new);
+        Place place = findPlaceById(placeId);
 
         return modelMapper.map(place, PlaceResponseModel.class);
     }
@@ -79,6 +77,23 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public PlaceResponseModel updatePlace(String placeId, PlaceRequestModel placeRequestModel) {
-        return null;
+        ModelMapper modelMapper = ModelMapperFactory.getInstance();
+        Place place = findPlaceById(placeId);
+
+        place.setPlaceName(placeRequestModel.getPlaceName());
+        place.setSlug(slugifier.slugify(place.getPlaceName()));
+        place.setCity(cityRepository
+                .findByCityId(placeRequestModel.getCityId())
+                .orElseThrow(ResourceNotFoundException::new));
+
+        place = placeRepository.save(place);
+
+        return modelMapper.map(place, PlaceResponseModel.class);
+    }
+
+    private Place findPlaceById(String placeId) {
+        return placeRepository
+                .findByPlaceId(placeId)
+                .orElseThrow(ResourceNotFoundException::new);
     }
 }
