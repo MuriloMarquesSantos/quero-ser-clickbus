@@ -22,7 +22,7 @@ public class State {
 
     private String stateId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String stateName;
 
     @PrePersist

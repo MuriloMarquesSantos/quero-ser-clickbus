@@ -1,24 +1,30 @@
 package com.clickbus.placesmanager.services.impl.services;
 
+import com.clickbus.placesmanager.dto.request.CityRequestModel;
+import com.clickbus.placesmanager.dto.request.StateRequestModel;
 import com.clickbus.placesmanager.dto.response.CityResponseModel;
 import com.clickbus.placesmanager.entities.City;
 import com.clickbus.placesmanager.exception.ResourceNotFoundException;
 import com.clickbus.placesmanager.repository.CityRepository;
 import com.clickbus.placesmanager.repository.StateRepository;
 import com.clickbus.placesmanager.services.CityServiceImpl;
+import com.clickbus.placesmanager.utils.ModelMapperFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.createValidCityEntity;
-import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.createValidCityRequestModel;
+import static com.clickbus.placesmanager.services.impl.helper.CityServiceImplTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.createListOfValidStateEntity;
 import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.createValidStateEntity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,39 +44,47 @@ public class CityServiceImplTest {
     @InjectMocks
     private CityServiceImpl cityService;
 
-    private static final List<String> VALID_CITY_NAMES = Arrays.asList("São Paulo", "Rio de Janeiro");
+    private List<City> cityList;
+    private List<CityRequestModel> cityRequestModels;
+
+    @Before
+    public void setUp() {
+        ModelMapper modelMapper = ModelMapperFactory.getInstance();
+        cityList = createListOfValidCityEntity();
+
+        cityRequestModels = cityList
+                .stream()
+                .map(city -> modelMapper.map(city, CityRequestModel.class))
+                .collect(Collectors.toList());
+    }
 
     @Test
     public void createCityWithValidNameAndValidState_then_shouldReturnValidCityResponseModel() {
         when(stateRepository.findByStateId(anyString())).thenReturn(Optional.of(createValidStateEntity()));
-        when(cityRepository.save(any(City.class))).thenReturn(createValidCityEntity());
+        when(cityRepository.save(any(City.class))).thenReturn(cityList.get(0));
 
-        CityResponseModel cityResponseModel = cityService.createCity(createValidCityRequestModel());
+        CityResponseModel cityResponseModel = cityService.createCity(cityRequestModels.get(0));
 
         assertNotNull(cityResponseModel);
-        assertNotNull(cityResponseModel.getCityName());
-        assertNotNull(cityResponseModel.getCityId());
+        assertEquals(cityList.get(0).getCityName(), cityResponseModel.getCityName());
+        assertEquals(cityList.get(0).getCityId(), cityResponseModel.getCityId());
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void createCityWithInvalidState_then_shouldThrowResourceNotFoundException() {
         when(stateRepository.findByStateId(anyString())).thenReturn(Optional.empty());
 
-        cityService.createCity(createValidCityRequestModel());
+        cityService.createCity(cityRequestModels.get(1));
     }
 
     @Test
     public void getAllCities_then_shouldReturnValidResponse() {
-        List<City> cityList = Arrays.asList(
-                City.builder().cityName(VALID_CITY_NAMES.get(0)).build(),
-                City.builder().cityName(VALID_CITY_NAMES.get(1)).build());
-
         when(cityRepository.findAll()).thenReturn(cityList);
 
         List<CityResponseModel> cityResponseModelList = cityService.getCities();
 
         assertNotNull(cityResponseModelList);
-        assertEquals(VALID_CITY_NAMES.size(), cityResponseModelList.size());
+        assertEquals(cityList.size(), cityResponseModelList.size());
     }
 
     @Test(expected = ResourceNotFoundException.class)

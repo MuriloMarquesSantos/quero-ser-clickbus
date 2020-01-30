@@ -2,7 +2,11 @@ package com.clickbus.placesmanager.services.impl.helper;
 
 import com.clickbus.placesmanager.dto.request.CityRequestModel;
 import com.clickbus.placesmanager.entities.City;
+import com.clickbus.placesmanager.entities.State;
 import com.github.javafaker.Faker;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.clickbus.placesmanager.services.impl.helper.StateServiceImplTestHelper.createValidStateEntity;
 
@@ -20,10 +24,9 @@ public class CityServiceImplTestHelper {
                 .build();
     }
 
-    public static CityRequestModel createValidCityRequestModel() {
-        return CityRequestModel.builder()
-                .cityName(faker.address().cityName())
-                .stateId(createValidStateEntity().getStateId())
-                .build();
+    public static List<City> createListOfValidCityEntity() {
+        return Arrays.asList(
+                createValidCityEntity(),
+                createValidCityEntity());
     }
  }

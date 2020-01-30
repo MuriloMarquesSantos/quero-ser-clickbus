@@ -36,17 +36,15 @@ public class StateServiceImplTest {
     @Mock
     private StateRepository stateRepository;
 
-    private static final Faker faker = new Faker();
-
     private List<State> stateList;
-    private List<StateRequestModel> stateRequestModel;
+    private List<StateRequestModel> stateRequestModels;
 
     @Before
     public void setUp() {
         ModelMapper modelMapper = ModelMapperFactory.getInstance();
         stateList = createListOfValidStateEntity();
 
-        stateRequestModel = stateList
+        stateRequestModels = stateList
                 .stream()
                 .map(state -> modelMapper.map(state, StateRequestModel.class))
                 .collect(Collectors.toList());
@@ -56,11 +54,11 @@ public class StateServiceImplTest {
     @Test
     public void createStateWithNotNullStateName_then_ShouldReturnValidStateResponseModel() {
         when(stateRepository.save(any(State.class))).thenReturn(stateList.get(0));
-        StateResponseModel stateResponseModel = stateService.createState(stateRequestModel.get(0));
+        StateResponseModel stateResponseModel = stateService.createState(stateRequestModels.get(0));
 
         assertNotNull(stateResponseModel);
         assertNotNull(stateResponseModel.getStateId());
-        assertEquals(stateResponseModel.getStateName(), stateRequestModel.get(0).getStateName());
+        assertEquals(stateResponseModel.getStateName(), stateRequestModels.get(0).getStateName());
     }
 
     @Test
