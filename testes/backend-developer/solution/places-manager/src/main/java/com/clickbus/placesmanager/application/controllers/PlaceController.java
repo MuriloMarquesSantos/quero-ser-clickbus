@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +19,20 @@ public class PlaceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PlaceResponseModel createState(@RequestBody @Valid PlaceRequestModel placeRequestModel) {
+    public PlaceResponseModel createPlace(@RequestBody @Valid PlaceRequestModel placeRequestModel) {
         return this.placeService.createPlace(placeRequestModel);
     }
+
+    @GetMapping("{placeId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceResponseModel getPlaceByPlaceId(@PathVariable String placeId) {
+        return this.placeService.getPlaceByPlaceId(placeId);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<PlaceResponseModel> getPlaces() {
+        return this.placeService.getPlaces();
+    }
+
 }
