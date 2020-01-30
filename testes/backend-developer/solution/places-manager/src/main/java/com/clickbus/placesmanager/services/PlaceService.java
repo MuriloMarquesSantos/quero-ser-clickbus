@@ -10,4 +10,5 @@ public interface PlaceService {
     List<PlaceResponseModel> getPlaces();
     PlaceResponseModel getPlaceByPlaceId(String placeId);
     List<PlaceResponseModel> getPlacesByPlaceName(String placeName);
+    PlaceResponseModel updatePlace(String placeId, PlaceRequestModel placeRequestModel);
 }

@@ -76,4 +76,9 @@ public class PlaceServiceImpl implements PlaceService {
                 .map(place -> modelMapper.map(place, PlaceResponseModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public PlaceResponseModel updatePlace(String placeId, PlaceRequestModel placeRequestModel) {
+        return null;
+    }
 }
