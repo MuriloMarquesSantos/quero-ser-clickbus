@@ -39,7 +39,7 @@ public class Place {
 
     @Column(nullable = false, updatable = false)
     @LastModifiedDate
-    private Date updatedAt;
+    private Date lastModifiedDate;
 
     @PrePersist
     private void generatePlaceId() {
