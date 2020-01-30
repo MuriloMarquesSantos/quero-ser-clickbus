@@ -11,7 +11,7 @@ public class ModelMapperFactory {
     private ModelMapperFactory(){}
 
     public static ModelMapper getInstance() {
-        if (!Optional.ofNullable(modelMapper).isPresent()) {
+        if (modelMapper == null) {
             modelMapper = new ModelMapper();
         }
         return modelMapper;
