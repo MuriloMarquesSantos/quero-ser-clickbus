@@ -34,4 +34,22 @@ public class StateTestHelper {
                 .stateId(faker.idNumber().valid())
                 .build();
     }
+
+    public static List<StateResponseModel> createListOfValidStateResponseModel() {
+        return Arrays.asList(
+                createValidStateResponseModel(),
+                createValidStateResponseModel()
+        );
+    }
+
+    public static StateRequestModel createInvalidStateRequestModel() {
+        return StateRequestModel.builder()
+                .build();
+    }
+
+    public static StateRequestModel createValidStateRequestModel() {
+        return StateRequestModel.builder()
+                .stateName(faker.address().state())
+                .build();
+    }
 }
