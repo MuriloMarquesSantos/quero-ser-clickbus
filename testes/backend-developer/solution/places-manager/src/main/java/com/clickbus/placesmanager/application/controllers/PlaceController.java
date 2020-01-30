@@ -23,7 +23,7 @@ public class PlaceController {
         return this.placeService.createPlace(placeRequestModel);
     }
 
-    @GetMapping("{placeId}")
+    @GetMapping("id/{placeId}")
     @ResponseStatus(HttpStatus.OK)
     public PlaceResponseModel getPlaceByPlaceId(@PathVariable String placeId) {
         return this.placeService.getPlaceByPlaceId(placeId);
@@ -33,6 +33,12 @@ public class PlaceController {
     @ResponseStatus(HttpStatus.OK)
     public List<PlaceResponseModel> getPlaces() {
         return this.placeService.getPlaces();
+    }
+
+    @GetMapping({"{placeName}"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<PlaceResponseModel> getPlaceByPlaceName(@PathVariable String placeName) {
+        return this.placeService.getPlacesByPlaceName(placeName);
     }
 
 }

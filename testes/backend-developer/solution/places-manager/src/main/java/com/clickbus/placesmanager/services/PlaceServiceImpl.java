@@ -48,7 +48,7 @@ public class PlaceServiceImpl implements PlaceService {
 
         return Optional.ofNullable(placeList)
                 .filter(list -> !list.isEmpty())
-                .orElseThrow(RuntimeException::new)
+                .orElseThrow(ResourceNotFoundException::new)
                 .stream()
                 .map(place -> modelMapper.map(place, PlaceResponseModel.class))
                 .collect(Collectors.toList());
@@ -62,5 +62,18 @@ public class PlaceServiceImpl implements PlaceService {
                 .orElseThrow(ResourceNotFoundException::new);
 
         return modelMapper.map(place, PlaceResponseModel.class);
+    }
+
+    @Override
+    public List<PlaceResponseModel> getPlacesByPlaceName(String placeName) {
+        ModelMapper modelMapper = ModelMapperFactory.getInstance();
+
+        List<Place> placeList = placeRepository.findAllByPlaceName(placeName);
+        return Optional.ofNullable(placeList)
+                .filter(list -> !list.isEmpty())
+                .orElseThrow(ResourceNotFoundException::new)
+                .stream()
+                .map(place -> modelMapper.map(place, PlaceResponseModel.class))
+                .collect(Collectors.toList());
     }
 }
