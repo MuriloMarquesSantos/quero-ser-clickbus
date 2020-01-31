@@ -49,21 +49,21 @@ Project
 
  ### With Docker
  - Start Docker in your local machine after cloning the project.
- - Run the command below on the root of your project:
+ - Run the command below on the root of the project:
   ```
-           $ docker-compose up --build
+$ docker-compose up --build
   ```
   Please make sure that MySql default port 3306 is not being used.
 
   ### With Maven  
 
-- Run the command below to compile you projet  
+- Run the command below to compile the project  
 
 ```
 $ mvn clean install
 ```
 
-- You can run it with the command below. If you are use modern IDEs such as IntelliJ and Spring Tool Suite, they have built-in spring-boot startup tools.
+- You can run it with the command below. If you are using modern IDEs such as IntelliJ and Spring Tool Suite, they have built-in spring-boot startup tools.
 
 ```
 $ mvn spring-boot:run
