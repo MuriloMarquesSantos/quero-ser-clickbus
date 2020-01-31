@@ -1,5 +1,6 @@
 package com.clickbus.placesmanager.services.impl.helper;
 
+import com.clickbus.placesmanager.dto.request.PlaceRequestModel;
 import com.clickbus.placesmanager.dto.response.PlaceResponseModel;
 import com.clickbus.placesmanager.entities.Place;
 import com.github.javafaker.Faker;
@@ -48,5 +49,18 @@ public class PlaceTestHelper {
                 createValidPlaceResponseModel(),
                 createValidPlaceResponseModel()
         );
+    }
+
+    public static PlaceRequestModel createValidPlaceRequestModel() {
+        return PlaceRequestModel.builder()
+                .cityId(faker.idNumber().valid())
+                .placeName(faker.address().streetName())
+                .build();
+    }
+
+    public static PlaceRequestModel createInvalidPlaceResponseModel() {
+        return PlaceRequestModel.builder()
+                .placeName(faker.address().streetName())
+                .build();
     }
 }

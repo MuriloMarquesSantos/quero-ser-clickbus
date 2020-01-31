@@ -1,9 +1,8 @@
-package com.clickbus.placesmanager.services.impl.controllers;
+package com.clickbus.placesmanager.services.impl.unit.controllers;
 
-import com.clickbus.placesmanager.controllers.StateController;
+import com.clickbus.placesmanager.controllers.CityController;
 import com.clickbus.placesmanager.exception.ResponseExceptionHandler;
-import com.clickbus.placesmanager.services.StateService;
-import com.clickbus.placesmanager.services.impl.helper.StateTestHelper;
+import com.clickbus.placesmanager.services.CityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,56 +14,58 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static com.clickbus.placesmanager.services.impl.helper.StateTestHelper.*;
+import static com.clickbus.placesmanager.services.impl.helper.CityTestHelper.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
-public class StateControllerTest {
+public class CityControllerTest {
 
     private MockMvc mockMvc;
 
     private ObjectMapper jsonObjectMapper;
 
     @InjectMocks
-    private StateController stateController;
+    private CityController cityController;
 
     @Mock
-    private StateService stateService;
+    private CityService cityService;
+
 
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders
-                .standaloneSetup(stateController)
+                .standaloneSetup(cityController)
                 .setControllerAdvice(new ResponseExceptionHandler())
                 .build();
         jsonObjectMapper = new ObjectMapper();
     }
 
     @Test
-    public void performGetStates_then_ShouldReturnOkResponse() throws Exception {
-        when(stateService.getStates()).thenReturn(createListOfValidStateResponseModel());
+    public void performGetCities_then_ShouldReturnOkResponse() throws Exception {
+        when(cityService.getCities()).thenReturn(createListOfValidCityResponseModel());
 
-        mockMvc.perform(get(StateController.BASE_PATH)
+        mockMvc.perform(get(CityController.BASE_PATH)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void performCreateStatesWithInvalidStateRequestModel_then_ShouldThrowBadRequest() throws Exception {
-        mockMvc.perform(post(StateController.BASE_PATH)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonObjectMapper.writeValueAsString(createInvalidStateRequestModel())))
+    public void performCreateCitiesWithoutState_then_ShouldThrowBadRequest() throws Exception {
+        mockMvc.perform(post(CityController.BASE_PATH)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(jsonObjectMapper.writeValueAsString(createInvalidCityRequestModel())))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void performCreateStates_then_returnOkResponse() throws Exception {
-        mockMvc.perform(post(StateController.BASE_PATH)
+    public void performCreateCitiesWithValidRequest_then_ShouldReturnCreatedResponse() throws Exception {
+        mockMvc.perform(post(CityController.BASE_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonObjectMapper.writeValueAsString(createValidStateRequestModel())))
+                .content(jsonObjectMapper.writeValueAsString(createValidCityRequestModel())))
                 .andExpect(status().isCreated());
     }
+
 }

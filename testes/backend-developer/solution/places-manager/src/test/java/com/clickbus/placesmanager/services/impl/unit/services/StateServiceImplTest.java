@@ -1,4 +1,4 @@
-package com.clickbus.placesmanager.services.impl.services;
+package com.clickbus.placesmanager.services.impl.unit.services;
 
 import com.clickbus.placesmanager.dto.request.StateRequestModel;
 import com.clickbus.placesmanager.dto.response.StateResponseModel;
