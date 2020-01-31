@@ -48,12 +48,12 @@ Project
 - I Have provided two ways of running application locally. Each user/developer shall choose what suits better for he/she.
 
 1) With Docker
-    - Start Docker in your local machine after cloning the project.
-    - Run the command below on the root of your project:
-    - ```
+ - Start Docker in your local machine after cloning the project.
+ - Run the command below on the root of your project:
+ - ```
            $ docker-compose up --build
       ```
-    - Please make sure that MySql default port 3306 is not being used.
+ - Please make sure that MySql default port 3306 is not being used.
 
 2) With Maven  
 
@@ -74,7 +74,7 @@ You can build the project with:
 $ mvn clean package
 ```
 
-##Tests
+## Tests
 
 Tests are separated in Test folder and in sub-folders: 
 
