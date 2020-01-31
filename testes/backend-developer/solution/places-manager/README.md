@@ -45,17 +45,17 @@ Project
 
 # Running the application locally
 
-- I Have provided two ways of running application locally. Each user/developer shall choose what suits better for he/she.
+- I Have provided two ways of running application locally. It's up to you to choose which one to use.
 
-1) With Docker
+  ### With Docker
  - Start Docker in your local machine after cloning the project.
  - Run the command below on the root of your project:
- - ```
+  ```
            $ docker-compose up --build
-      ```
- - Please make sure that MySql default port 3306 is not being used.
+  ```
+  Please make sure that MySql default port 3306 is not being used.
 
-2) With Maven  
+  ### With Maven  
 
 - Run the command below to compile you projet  
 
