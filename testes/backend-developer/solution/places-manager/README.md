@@ -47,7 +47,7 @@ Project
 
 - I Have provided two ways of running application locally. It's up to you to choose which one to use.
 
-  ### With Docker
+ ### With Docker
  - Start Docker in your local machine after cloning the project.
  - Run the command below on the root of your project:
   ```
